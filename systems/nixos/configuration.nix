@@ -21,8 +21,8 @@
   };
 
   # Enable swap on luks
-  boot.initrd.luks.devices."luks-27da2bce-9f3e-4fdc-b280-77023f2c7cb6".device = "/dev/disk/by-uuid/27da2bce-9f3e-4fdc-b280-77023f2c7cb6";
-  boot.initrd.luks.devices."luks-27da2bce-9f3e-4fdc-b280-77023f2c7cb6".keyFile = "/crypto_keyfile.bin";
+  boot.initrd.luks.devices."luks-b918082c-a53e-4ee8-9b1b-677515d12c06".device = "/dev/disk/by-uuid/b918082c-a53e-4ee8-9b1b-677515d12c06";
+  boot.initrd.luks.devices."luks-b918082c-a53e-4ee8-9b1b-677515d12c06".keyFile = "/crypto_keyfile.bin";
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -38,7 +38,19 @@
   time.timeZone = "Australia/Sydney";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_AU.utf8";
+  i18n.defaultLocale = "en_AU.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_AU.UTF-8";
+    LC_IDENTIFICATION = "en_AU.UTF-8";
+    LC_MEASUREMENT = "en_AU.UTF-8";
+    LC_MONETARY = "en_AU.UTF-8";
+    LC_NAME = "en_AU.UTF-8";
+    LC_NUMERIC = "en_AU.UTF-8";
+    LC_PAPER = "en_AU.UTF-8";
+    LC_TELEPHONE = "en_AU.UTF-8";
+    LC_TIME = "en_AU.UTF-8";
+  };
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
@@ -55,10 +67,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-  # Enable ClamAv virus scanning
-  services.clamav.daemon.enable = true;
-  services.clamav.updater.enable = true;
 
   # Enable sound with pipewire.
   sound.enable = true;
@@ -81,10 +89,11 @@
   # services.xserver.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.aaronnewton = {
+  users.users.kevinp = {
     isNormalUser = true;
-    description = "Aaron Newton";
-    extraGroups = [ "networkmanager" "wheel" ];
+    description = "Kevin Picard";
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    shell = "/etc/profiles/per-user/kevinp/bin/zsh";
     packages = with pkgs; [
       firefox
     #  thunderbird
@@ -126,14 +135,6 @@
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
-  system.stateVersion = "22.05"; # Did you read the comment?
-
-    # Custom programs
-#  let pkgs = import <nixpkgs> {};
-#  in pkgs.callPackage (
-#    # whatever is in hello.nix
-#    git
-#  ) {}
-
+  system.stateVersion = "22.11"; # Did you read the comment?
 
 }
