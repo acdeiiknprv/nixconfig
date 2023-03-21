@@ -21,6 +21,7 @@
     unzip
     wget
     zip
+    postman
     openvpn
     vim
     meld
